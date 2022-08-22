@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">OrderTheDay</string>
+    <string name="button_add_text">Hinzufügen</string>
+    <string name="button_delete_text">Löschen</string>
+    <string name="button_search_text">Suchen</string>
+    <string name="button_appointment_text">Termine</string>
+    <string name="button_contact_text">Kontakte</string>
+    <string name="button_delete_button">Löschen</string>
+    <string name="button_list_appointments">Alle Termine auflisten</string>
+    <string name="text_forname_hint">Vorname</string>
+    <string name="text_surname_hint">Nachname</string>
+    <string name="text_phonenumber_hint">Telefonnummer</string>
+    <string name="text_street_hint">Straße</string>
+    <string name="text_number_hint">Hausnummer</string>
+    <string name="text_postcode_hint">Postleitzahl</string>
+    <string name="text_city_hint">Stadt</string>
+    <string name="text_address_hint">Adresse</string>
+    <string name="contact_text_info">Kontakt...</string>
+    <string name="hint_choose_contact">Wähle ein Kontakt aus...</string>
+    <string name="hint_choose_time">Wähle eine Uhrzeit aus...</string>
+    <string name="hint_choose_date">Wähle ein Datum aus...</string>
+    <string name="hint_duration_time">Schreibe die Dauer in Stunden auf...</string>
+    <string name="text_hint_duration">Dauer in Stunden (halbe Stunde = 0,5)</string>
+    <string name="time_fullHour">Uhrzeit volle Stunden</string>
+    <string name="time_halfHour">Uhrzeit halbe Stunden</string>
+    <string name="button_text_book">Buchen</string>
+    <string name="table_head_name">Name</string>
+    <string name="table_head_date">Datum</string>
+    <string name="table_head_time">Zeit</string>
+    <string name="table_head_duration">Dauer</string>
+    <string name="text_hint_appointment">Termin...</string>
+</resources>
