@@ -23,37 +23,37 @@
                 android:id="@+id/textView15"
                 android:layout_width="97.5dp"
                 android:layout_height="wrap_content"
-                android:background="@color/teal_200"
+                android:background="@android:color/system_accent2_500"
                 android:text="@string/table_head_name"
                 android:textAlignment="center"
-                android:textColor="#004D40" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="97.5dp"
                 android:layout_height="wrap_content"
-                android:background="@color/teal_200"
+                android:background="@android:color/system_accent2_500"
                 android:text="@string/table_head_date"
                 android:textAlignment="center"
-                android:textColor="#004D40" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="97.5dp"
                 android:layout_height="wrap_content"
-                android:background="@color/teal_200"
+                android:background="@android:color/system_accent2_500"
                 android:text="@string/table_head_time"
                 android:textAlignment="center"
-                android:textColor="#004D40" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="97.5dp"
                 android:layout_height="wrap_content"
-                android:background="@color/teal_200"
+                android:background="@android:color/system_accent2_500"
                 android:text="@string/table_head_duration"
                 android:textAlignment="center"
-                android:textColor="#004D40" />
+                android:textColor="@color/black" />
         </TableRow>
 
     </TableLayout>
@@ -63,6 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:backgroundTint="@android:color/system_accent2_800"
         android:text="@string/button_delete_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -37,7 +37,7 @@
                     android:id="@+id/textView4"
                     android:layout_width="85dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/text_forname_hint"
                     android:textAlignment="center"
                     android:textColor="#000000" />
@@ -46,7 +46,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="85dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/text_surname_hint"
                     android:textAlignment="center"
                     android:textColor="#000000" />
@@ -55,7 +55,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="105dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/text_phonenumber_hint"
                     android:textAlignment="center"
                     android:textColor="#000000" />
@@ -64,7 +64,7 @@
                     android:id="@+id/textView"
                     android:layout_width="115dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/text_address_hint"
                     android:textAlignment="center"
                     android:textColor="#000000" />
@@ -115,7 +115,7 @@
                     android:id="@+id/textView8"
                     android:layout_width="195dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/time_fullHour"
                     android:textAlignment="center"
                     android:textColor="#000000" />
@@ -124,7 +124,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="195dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/time_halfHour"
                     android:textAlignment="center"
                     android:textColor="#000000" />
@@ -147,6 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:backgroundTint="@android:color/system_accent2_800"
         android:text="@string/button_text_book"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.97"

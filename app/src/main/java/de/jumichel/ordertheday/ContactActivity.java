@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ContactActivity extends AppCompatActivity implements View.OnClickListener {
-    // app_id
+
     int clickedID;
 
     Button button_add;

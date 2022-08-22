@@ -37,7 +37,7 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(deleteAppointment()){
                     Toast.makeText(getBaseContext(), "Erfolgreich gelöscht.", Toast.LENGTH_SHORT).show();
-                    listAllAppointments();
+
                 } else {
                     Toast.makeText(getBaseContext(), "Fehler", Toast.LENGTH_SHORT).show();
                 }

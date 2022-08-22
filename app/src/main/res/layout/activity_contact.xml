@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="48dp"
+        android:backgroundTint="@android:color/system_accent2_800"
         android:text="@string/button_search_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
+        android:backgroundTint="@android:color/system_accent2_800"
         android:text="@string/button_add_text"
         app:layout_constraintEnd_toStartOf="@+id/button_deleteContact"
         app:layout_constraintStart_toEndOf="@+id/button_search"
@@ -56,33 +58,37 @@
                     android:id="@+id/textView4"
                     android:layout_width="85dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/text_forname_hint"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="85dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/text_surname_hint"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="105dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/text_phonenumber_hint"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="115dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/teal_200"
+                    android:background="@android:color/system_accent2_500"
                     android:text="@string/text_address_hint"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
             </TableRow>
 
         </TableLayout>
@@ -94,6 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="15dp"
+        android:backgroundTint="@android:color/system_accent2_800"
         android:text="@string/button_delete_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
