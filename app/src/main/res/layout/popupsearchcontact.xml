@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF">
 
     <EditText
         android:id="@+id/textSearchSurname"
@@ -49,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:backgroundTint="@color/main_dark"
         android:backgroundTintMode="add"
         android:text="@string/button_search_text"
         app:layout_constraintEnd_toEndOf="parent"
