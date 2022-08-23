@@ -3,8 +3,8 @@
     <string name="button_add_text">Hinzufügen</string>
     <string name="button_delete_text">Löschen</string>
     <string name="button_search_text">Suchen</string>
-    <string name="button_appointment_text">Termine</string>
-    <string name="button_contact_text">Kontakte</string>
+    <string name="button_appointment_text">Termine verwalten</string>
+    <string name="button_contact_text">Kontakte verwalten</string>
     <string name="button_delete_button">Löschen</string>
     <string name="button_list_appointments">Alle Termine auflisten</string>
     <string name="text_forname_hint">Vorname</string>
