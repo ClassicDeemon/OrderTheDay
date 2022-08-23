@@ -12,11 +12,11 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String COLUMN_ID = "id";
-    public static final String COLUMN_FORNAME = "forname";
-    public static final String COLUMN_SURNAME = "surname";
-    public static final String COLUMN_PHONENUMBER = "phonenumber";
-    public static final String COLUMN_ADDRESS = "address";
+    public static final String COLUMN_ID = "con_id";
+    public static final String COLUMN_FORNAME = "con_forname";
+    public static final String COLUMN_SURNAME = "con_surname";
+    public static final String COLUMN_PHONENUMBER = "con_phonenumber";
+    public static final String COLUMN_ADDRESS = "con_address";
 
     public static final String databaseName = "contactbook.db";
     public static final String tableName = "contactbook";
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean firstAppStart() {
         boolean first = false;
-        SharedPreferences sharedPreferences = getSharedPreferences("firstStartApp", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("firstAppStart", MODE_PRIVATE);
         SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
         if (sharedPreferences.getBoolean("firstStartApp", false) == false){
             first = true;
@@ -76,7 +76,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void createDatabase() {
         SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
+        database.execSQL("CREATE TABLE " + MainActivity.tableName + "(" +
+                MainActivity.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                MainActivity.COLUMN_FORNAME + " TEXT NOT NULL, " +
+                MainActivity.COLUMN_SURNAME + " TEXT NOT NULL, " +
+                MainActivity.COLUMN_PHONENUMBER + " TEXT NOT NULL, " +
+                MainActivity.COLUMN_ADDRESS + " TEXT NOT NULL);");
         database.execSQL("CREATE TABLE " + AppointmentsActivity.TABLEAPPOINTMENT + "(" +
+                AppointmentsActivity.COLUMN_APPID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 AppointmentsActivity.COLUMN_CONTACTID + " TEXT NOT NULL, " +
                 AppointmentsActivity.COLUMN_DATE + " TEXT NOT NULL, " +
                 AppointmentsActivity.COLUMN_TIME + " TEXT NOT NULL, " +

@@ -15,7 +15,7 @@ public class Contact {
         address = new Address();
     }
 
-    public Contact(String forname, String surname, String phonenumber, String street, int number, String postcode, String city) {
+    public Contact(String forname, String surname, String phonenumber, String street, String number, String postcode, String city) {
         this.forname = forname;
         this.surname = surname;
         this.phonenumber = phonenumber;

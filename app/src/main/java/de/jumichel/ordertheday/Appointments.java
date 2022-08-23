@@ -25,11 +25,13 @@ public class Appointments extends AppCompatActivity {
 
     private Date date;
     private double duration;
+    private String myDate;
 
     public Appointments(){}
 
     CalendarView calendar;
     EditText duration_text;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +47,17 @@ public class Appointments extends AppCompatActivity {
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
-                duration = Integer.parseInt(duration_text.getText().toString().trim());
-                date = new Date(day, month, year);
+                duration = Double.parseDouble(duration_text.getText().toString().replace(",", ".").trim());
+                date = new Date(day, month + 1, year);
 
-                Toast.makeText(getApplicationContext(), date.toString(), Toast.LENGTH_SHORT).show();
+
+                String fm = String.format("%02d", month + 1);
+                String fd = String.format("%02d", day);
+                myDate = Integer.toString(year) + "-" + fm + "-" + fd;
+                Toast.makeText(getApplicationContext(), myDate, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(Appointments.this, AppointmentsActivity.class);
-                intent.putExtra("Date", date.toString());
+                intent.putExtra("Date", myDate);
                 intent.putExtra("Duration", Double.toString(duration));
                 startActivity(intent);
 

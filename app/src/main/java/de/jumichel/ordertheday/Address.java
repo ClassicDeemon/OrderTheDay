@@ -3,18 +3,18 @@ package de.jumichel.ordertheday;
 public class Address {
 
     private String street;
-    private int number;
+    private String number;
     private String postcode;
     private String city;
 
     public Address(){
         street = "Technikumplatz";
-        number = 17;
+        number = String.valueOf(17);
         postcode = "09648";
         city = "Mittweida";
     }
 
-    public Address(String street, int number, String postcode, String city) {
+    public Address(String street, String number, String postcode, String city) {
         this.street = street;
         this.number = number;
         this.postcode =  postcode;
@@ -29,11 +29,11 @@ public class Address {
         this.street = street;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

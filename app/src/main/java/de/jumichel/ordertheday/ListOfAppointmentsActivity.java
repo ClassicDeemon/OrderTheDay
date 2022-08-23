@@ -49,15 +49,22 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
         table.removeViews(1, Math.max(0, table.getChildCount() - 1));
 
         SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
-        Cursor cursor = database.rawQuery("SELECT a.id, a.forname, a.surname, b.date, b.time, b.duration FROM " + MainActivity.tableName +
-                " AS a LEFT JOIN " + AppointmentsActivity.TABLEAPPOINTMENT + " AS b ON b." + AppointmentsActivity.COLUMN_CONTACTID
-                + " = a." + MainActivity.COLUMN_ID, null);
+        Cursor cursor = database.rawQuery("SELECT " +
+                AppointmentsActivity.COLUMN_APPID+", " +
+                MainActivity.COLUMN_FORNAME+", " +
+                MainActivity.COLUMN_SURNAME+", " +
+                AppointmentsActivity.COLUMN_DATE+", " +
+                AppointmentsActivity.COLUMN_TIME+", " +
+                AppointmentsActivity.COLUMN_DURATION+" " +
+                "FROM "+AppointmentsActivity.TABLEAPPOINTMENT+" LEFT JOIN "+MainActivity.tableName+
+                " ON "+AppointmentsActivity.COLUMN_CONTACTID+" = "+MainActivity.COLUMN_ID+ " " +
+                " ORDER BY "+ AppointmentsActivity.COLUMN_DATE +" ASC, "+ AppointmentsActivity.COLUMN_TIME + " ASC ", null);
         cursor.moveToFirst();
 
         if (cursor.getCount() > 0) {
             StringBuilder stringBuilder = new StringBuilder();
 
-            while (cursor.moveToNext()) {
+            do {
                 stringBuilder.append(cursor.getString(0));
                 tableRow = new TableRow(this);
                 tableRow.setId(cursor.getInt(0));
@@ -74,9 +81,11 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
                 textName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tableRow.addView(textName);
 
+                String[] myDate = cursor.getString(3).split("-");
+
                 textDate = new TextView(this);
                 textDate.setWidth(98);
-                textDate.setText(cursor.getString(3));
+                textDate.setText(myDate[2] + "." + myDate[1] + "." + myDate[0]);
                 textDate.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 tableRow.addView(textDate);
 
@@ -93,7 +102,7 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
                 tableRow.addView(textDuration);
 
                 table.addView(tableRow);
-            }
+            } while (cursor.moveToNext());
             cursor.close();
             database.close();
         }
@@ -116,9 +125,11 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
         boolean check = false;
         if(clickedID != 0) {
             SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
-            database.execSQL("DELETE FROM " + AppointmentsActivity.TABLEAPPOINTMENT + " WHERE " + AppointmentsActivity.COLUMN_CONTACTID + " = " + clickedID);
+            database.execSQL("DELETE FROM " + AppointmentsActivity.TABLEAPPOINTMENT + " WHERE " + AppointmentsActivity.COLUMN_APPID + " = " + clickedID);
             database.close();
+
             check = true;
+            listAllAppointments();
         }
         return check;
     }

@@ -50,10 +50,6 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-        if(firstAppStart()) {
-            createDatabase();
-        }
-
         button_search = (Button) findViewById(R.id.button_search);
         button_add = findViewById(R.id.button_add);
         button_deleteContact = findViewById(R.id.button_deleteContact);
@@ -72,14 +68,14 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         table.removeViews(1, Math.max(0, table.getChildCount() - 1));
 
         SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
-        Cursor cursor = database.rawQuery("SELECT * FROM " + MainActivity.tableName + " ORDER BY " + MainActivity.COLUMN_SURNAME +" ASC, " +
-                MainActivity.COLUMN_FORNAME + " ASC, " + MainActivity.COLUMN_ID + " ASC", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM " + MainActivity.tableName + " ORDER BY " + MainActivity.COLUMN_SURNAME + " ASC, " +
+                MainActivity.COLUMN_FORNAME + " ASC", null);
         cursor.moveToFirst();
 
-        if(cursor.getCount() > 0) {
+        if (cursor.getCount() > 0) {
             StringBuilder stringBuilder = new StringBuilder();
 
-            while(cursor.moveToNext()) {
+            do {
                 stringBuilder.append(cursor.getString(0));
                 tableRow = new TableRow(this);
                 tableRow.setId(cursor.getInt(0));
@@ -111,40 +107,13 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 tableRow.addView(textAddressTable);
 
                 table.addView(tableRow);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         database.close();
     }
 
-    public void createDatabase() {
-        SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
-        database.execSQL("CREATE TABLE " + MainActivity.tableName + "(" +
-                MainActivity.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                MainActivity.COLUMN_FORNAME + " TEXT NOT NULL, " +
-                MainActivity.COLUMN_SURNAME + " TEXT NOT NULL, " +
-                MainActivity.COLUMN_PHONENUMBER + " TEXT NOT NULL, " +
-                MainActivity.COLUMN_ADDRESS + " TEXT NOT NULL);");
-        database.execSQL("CREATE TABLE " + AppointmentsActivity.TABLEAPPOINTMENT + "(" +
-                AppointmentsActivity.COLUMN_CONTACTID + " TEXT NOT NULL, " +
-                AppointmentsActivity.COLUMN_DATE + " TEXT NOT NULL, " +
-                AppointmentsActivity.COLUMN_TIME + " TEXT NOT NULL, " +
-                AppointmentsActivity.COLUMN_DURATION + " TEXT NOT NULL);");
-        database.close();
-    }
 
-    public boolean firstAppStart() {
-        boolean first = false;
-        SharedPreferences sharedPreferences = getSharedPreferences("firstStart", MODE_PRIVATE);
-        SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
-        if (sharedPreferences.getBoolean("firstStart", false) == false){
-            first = true;
-            sharedPreferencesEditor.putBoolean("firstStart", true);
-            sharedPreferencesEditor.commit();
-        }
-
-        return first;
-    }
 
     public boolean addContact(Contact contact) {
         boolean check = false;
@@ -204,11 +173,27 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void createContact() {
-    Contact contact = new Contact(text_forname.getText().toString().trim(), text_surname.getText().toString().trim(),
-            text_phonenumber.getText().toString().trim(), text_street.getText().toString().trim(),
-            Integer.parseInt(text_number.getText().toString().trim()),
-            text_postcode.getText().toString().trim(), text_city.getText().toString().trim());
-    if (addContact(contact)) {
+        if (checkContact(text_forname.getText().toString().trim(), text_surname.getText().toString().trim())) {
+            Contact contact = new Contact(text_forname.getText().toString().trim(), text_surname.getText().toString().trim(),
+                    text_phonenumber.getText().toString().trim(), text_street.getText().toString().trim(),
+                    text_number.getText().toString().trim(),
+                    text_postcode.getText().toString().trim(), text_city.getText().toString().trim());
+
+            if (addContact(contact)) {
+                text_forname.setText("");
+                text_surname.setText("");
+                text_phonenumber.setText("");
+                text_street.setText("");
+                text_number.setText("");
+                text_postcode.setText("");
+                text_city.setText("");
+            } else {
+                Toast.makeText(getApplicationContext(), "Kontakt konnte nicht hinzugefügt werden.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Kontakt bereits vorhanden.",
+                    Toast.LENGTH_SHORT).show();
             text_forname.setText("");
             text_surname.setText("");
             text_phonenumber.setText("");
@@ -216,10 +201,21 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
             text_number.setText("");
             text_postcode.setText("");
             text_city.setText("");
-        } else {
-        Toast.makeText(getApplicationContext(), "Kontakt konnte nicht hinzugefügt werden.",
-                Toast.LENGTH_SHORT).show();
+        }
     }
+
+    public boolean checkContact(String forname, String surname) {
+        boolean okay = false;
+        SQLiteDatabase databaseUser = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
+        Cursor cursorUser = databaseUser.rawQuery("SELECT COUNT(*) FROM "+MainActivity.tableName+" " +
+                "WHERE "+MainActivity.COLUMN_FORNAME+" = '" + forname + "' AND "+MainActivity.COLUMN_SURNAME+" = '" + surname + "'", null);
+        cursorUser.moveToFirst();
+        if(cursorUser.getInt(0) == 0) {
+            okay = true;
+        }
+        cursorUser.close();
+        databaseUser.close();
+        return okay;
     }
 
     public void showPopup(View view) {

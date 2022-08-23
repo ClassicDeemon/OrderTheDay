@@ -16,11 +16,11 @@ import android.widget.Toast;
 public class AppointmentsActivity extends AppCompatActivity {
 
     public static final String TABLEAPPOINTMENT = "appointment";
-    public static final String COLUMN_CONTACTID = "con_id";
-    public static final String COLUMN_DATE = "date";
-    public static final String COLUMN_DURATION = "duration";
-    public static final String COLUMN_TIME = "time";
-
+    public static final String COLUMN_CONTACTID = "app_conid";
+    public static final String COLUMN_DATE = "app_date";
+    public static final String COLUMN_DURATION = "app_duration";
+    public static final String COLUMN_TIME = "app_time";
+    public static final String COLUMN_APPID = "app_id";
 
     TableLayout tableContact;
     TableRow tableRowContact;
@@ -51,7 +51,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         button_book_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), date + " " + duration, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), clickedIdContact + " - " + date + " " + duration, Toast.LENGTH_SHORT).show();
                 if(addAppointment()) {
                     Toast.makeText(getApplicationContext(), "Termin wurde hinzugefügt.",
                             Toast.LENGTH_SHORT).show();
@@ -97,7 +97,7 @@ public class AppointmentsActivity extends AppCompatActivity {
             textHalfHour.setText((time + ":30"));
             textHalfHour.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             textHalfHour.setId(idHalf);
-            idHalf = idHalf + 1;
+            idHalf = idHalf + 2;
             textHalfHour.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -136,7 +136,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         if (cursor.getCount() > 0) {
             StringBuilder stringBuilder = new StringBuilder();
 
-            while (cursor.moveToNext()) {
+            do {
                 stringBuilder.append(cursor.getString(0));
                 tableRowContact = new TableRow(this);
                 tableRowContact.setId(cursor.getInt(0));
@@ -168,7 +168,7 @@ public class AppointmentsActivity extends AppCompatActivity {
                 tableRowContact.addView(textAddressTable);
 
                 table.addView(tableRowContact);
-            }
+            } while (cursor.moveToNext());
         }
         cursor.close();
         database.close();
@@ -185,22 +185,28 @@ public class AppointmentsActivity extends AppCompatActivity {
         clickedIdContact = view.getId();
         table = findViewById(clickedIdContact);
         table.setBackgroundColor(getResources().getColor(R.color.teal_200));
+        Toast.makeText(getApplicationContext(), "ID: " + clickedIdContact, Toast.LENGTH_SHORT).show();
 
     }
 
     public String convertToTime() {
         TextView text = findViewById(clickedIdTime);
-        return text.getText().toString();
+        String txt = text.getText().toString().trim();
+        String format = String.format("%5s", txt);
+        format = format.replace(' ','0');
+        return  format;
     }
 
     public boolean addAppointment() {
         boolean check = false;
         Appointments appointments = new Appointments();
         try {
+            String myTime = convertToTime();
+            Toast.makeText(getApplicationContext(), "TIME: " + myTime, Toast.LENGTH_SHORT).show();
             SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
             database.execSQL("INSERT INTO " + TABLEAPPOINTMENT + " (" + COLUMN_CONTACTID + ", " + COLUMN_DATE + ", "
                     + COLUMN_TIME + ", " + COLUMN_DURATION + ")VALUES('" + clickedIdContact + "','" + date + "','"
-                    + convertToTime() + "','" + duration + "')");
+                    + myTime + "','" + duration + "')");
             database.close();
             check = true;
         } catch (Exception e) {
