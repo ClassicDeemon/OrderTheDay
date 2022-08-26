@@ -173,13 +173,45 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void createContact() {
-        if (checkContact(text_forname.getText().toString().trim(), text_surname.getText().toString().trim())) {
-            Contact contact = new Contact(text_forname.getText().toString().trim(), text_surname.getText().toString().trim(),
-                    text_phonenumber.getText().toString().trim(), text_street.getText().toString().trim(),
-                    text_number.getText().toString().trim(),
-                    text_postcode.getText().toString().trim(), text_city.getText().toString().trim());
+        String forname, surname;
+        forname = text_forname.getText().toString().trim();
+        surname = text_surname.getText().toString().trim();
+        if(!(forname.isEmpty() || surname.isEmpty())) {
+            String phonenumber, street, number, postcode, city;
+            phonenumber = text_phonenumber.getText().toString().trim();
+            street = text_street.getText().toString().trim();
+            number = text_number.getText().toString().trim();
+            postcode = text_postcode.getText().toString().trim();
+            city = text_city.getText().toString().trim();
 
-            if (addContact(contact)) {
+            if (phonenumber.isEmpty()) { phonenumber = "---";}
+            if (street.isEmpty()) { street = "---";}
+            if (number.isEmpty()) { number = "---";}
+            if (postcode.isEmpty()) { postcode = "---";}
+            if (city.isEmpty()) { city = "---";}
+
+            if (checkContact(text_forname.getText().toString().trim(), text_surname.getText().toString().trim())) {
+
+                Contact contact = new Contact(text_forname.getText().toString().trim(), text_surname.getText().toString().trim(),
+                        phonenumber, street, number, postcode, city);
+
+                if (addContact(contact)) {
+                    Toast.makeText(getApplicationContext(), "Kontakt wurde hinzugefügt.",
+                            Toast.LENGTH_SHORT).show();
+                    text_forname.setText("");
+                    text_surname.setText("");
+                    text_phonenumber.setText("");
+                    text_street.setText("");
+                    text_number.setText("");
+                    text_postcode.setText("");
+                    text_city.setText("");
+                } else {
+                    Toast.makeText(getApplicationContext(), "Kontakt konnte nicht hinzugefügt werden.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Kontakt bereits vorhanden.",
+                        Toast.LENGTH_SHORT).show();
                 text_forname.setText("");
                 text_surname.setText("");
                 text_phonenumber.setText("");
@@ -187,20 +219,10 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
                 text_number.setText("");
                 text_postcode.setText("");
                 text_city.setText("");
-            } else {
-                Toast.makeText(getApplicationContext(), "Kontakt konnte nicht hinzugefügt werden.",
-                        Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(getApplicationContext(), "Kontakt bereits vorhanden.",
+            Toast.makeText(getApplicationContext(), "Ein Kontakt muss einen Vor- und Nachnamen besitzen",
                     Toast.LENGTH_SHORT).show();
-            text_forname.setText("");
-            text_surname.setText("");
-            text_phonenumber.setText("");
-            text_street.setText("");
-            text_number.setText("");
-            text_postcode.setText("");
-            text_city.setText("");
         }
     }
 

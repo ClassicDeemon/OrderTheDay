@@ -127,7 +127,6 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
             SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
             database.execSQL("DELETE FROM " + AppointmentsActivity.TABLEAPPOINTMENT + " WHERE " + AppointmentsActivity.COLUMN_APPID + " = " + clickedID);
             database.close();
-
             check = true;
             listAllAppointments();
         }

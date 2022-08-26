@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="360dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@android:color/system_accent2_800"
         android:text="@string/button_contact_text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -26,18 +26,18 @@
         android:text="@string/button_list_appointments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnContact" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAppointment" />
 
     <Button
         android:id="@+id/btnAppointment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@android:color/system_accent2_800"
         android:text="@string/button_appointment_text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnContact" />
 
 
     <ImageView

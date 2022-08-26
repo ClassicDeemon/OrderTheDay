@@ -47,20 +47,28 @@ public class Appointments extends AppCompatActivity {
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
-                duration = Double.parseDouble(duration_text.getText().toString().replace(",", ".").trim());
-                date = new Date(day, month + 1, year);
+                String durationCheck = duration_text.getText().toString().trim();
+                if (!durationCheck.isEmpty()) {
+                    duration = Double.parseDouble(duration_text.getText().toString().replace(",", ".").trim());
+                    if (duration <= 0) {
+                        Toast.makeText(getApplicationContext(), "Es muss eine Dauer festgelegt werden, welche im positiven Bereich liegt.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        date = new Date(day, month + 1, year);
 
 
-                String fm = String.format("%02d", month + 1);
-                String fd = String.format("%02d", day);
-                myDate = Integer.toString(year) + "-" + fm + "-" + fd;
-                Toast.makeText(getApplicationContext(), myDate, Toast.LENGTH_SHORT).show();
+                        String fm = String.format("%02d", month + 1);
+                        String fd = String.format("%02d", day);
+                        myDate = Integer.toString(year) + "-" + fm + "-" + fd;
 
-                Intent intent = new Intent(Appointments.this, AppointmentsActivity.class);
-                intent.putExtra("Date", myDate);
-                intent.putExtra("Duration", Double.toString(duration));
-                startActivity(intent);
 
+                        Intent intent = new Intent(Appointments.this, AppointmentsActivity.class);
+                        intent.putExtra("Date", myDate);
+                        intent.putExtra("Duration", Double.toString(duration));
+                        startActivity(intent);
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Es muss eine Dauer festgelegt werden.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
