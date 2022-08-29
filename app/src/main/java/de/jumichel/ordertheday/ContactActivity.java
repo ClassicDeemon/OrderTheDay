@@ -63,7 +63,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         listAllContacts(table);
 
     }
-
+    //alle Kontakte werden in der Tabelle ausgegeben
     public void listAllContacts(TableLayout table) {
         table.removeViews(1, Math.max(0, table.getChildCount() - 1));
 
@@ -114,7 +114,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-
+    //Der Kontakt wird in die Datenbank eingefügt
     public boolean addContact(Contact contact) {
         boolean check = false;
         try {
@@ -132,6 +132,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         return check;
     }
 
+    //Ausgewählter Kontakte wird gelöscht
     public boolean deleteContact() {
         boolean check = false;
             if(clickedID != 0) {
@@ -143,6 +144,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         return check;
     }
 
+    //der eingegebene Kontakt wird gesucht und Ausgegeben
     public boolean getContact(String forname, String surname) {
         boolean check = false;
         try {
@@ -172,6 +174,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         return check;
     }
 
+    //Kontakt wird erstellt und richtig formatiert
     public void createContact() {
         String forname, surname;
         forname = text_forname.getText().toString().trim();
@@ -226,6 +229,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    //es wird überprüft, ob der Kontakt bereits vorhanden ist
     public boolean checkContact(String forname, String surname) {
         boolean okay = false;
         SQLiteDatabase databaseUser = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
@@ -240,6 +244,8 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         return okay;
     }
 
+    //Popup wird geöffnet und die einzelnen Komponenten dessen geladen und verarbeitet
+    //Alle nötigen Dinge für das Suchen des Kontaktes zu suchen
     public void showPopup(View view) {
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popupsearchcontact, null);
@@ -258,6 +264,8 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         button_searchPopup.setOnClickListener(this);
     }
 
+    //Popup wird geöffnet und einzelne Komponenten geladen und benutzt damit der Kontakt hinzugefügt werden kann
+    //Die EditText für die Erstellung des Kontaktes werden hier erstellt
     public void contactAddPopup(View view) {
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popupaddcontact, null);
@@ -281,6 +289,8 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         button_addPopup.setOnClickListener(this);
     }
 
+    //auf Klick der Zeile der Tabelle wird diese ausgewählt
+    //Kontakt wird ausgewählt
     public void onClickTableRow(View view, TableRow table) {
 
         if(clickedID != 0) {
@@ -295,7 +305,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-
+    //fast alle im Code beschriebene Knöpfe werden hier wenn sie geklickt werden ausgeführt
     @Override
     public void onClick(View view) {
 

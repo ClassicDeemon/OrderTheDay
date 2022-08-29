@@ -11,7 +11,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
+//Klasse wo alle termine aufgelistet werden und das Löschen dieser unternommen werden kann
 public class ListOfAppointmentsActivity extends AppCompatActivity {
 
     int clickedID;
@@ -22,6 +22,7 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
 
     Button button_delete_appointment;
 
+    //aufrufen aller wichtigen Methoden
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
             }
         });
     }
-
+    //alle Termine werden aufgelistet
     public void listAllAppointments() {
         table.removeViews(1, Math.max(0, table.getChildCount() - 1));
 
@@ -107,6 +108,7 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
             database.close();
         }
     }
+    //wenn auf eine Zeile geklickt wird, wird diese ausgewählt
     public void onClickTableRow(View view, TableRow row) {
 
         if(clickedID != 0) {
@@ -120,7 +122,7 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
         row.setBackgroundColor(getResources().getColor(R.color.teal_200));
 
     }
-
+    //ausgewählter Termin wird gelöscht
     public boolean deleteAppointment() {
         boolean check = false;
         if(clickedID != 0) {

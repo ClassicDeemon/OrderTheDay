@@ -12,7 +12,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
+    //Hier wird die tabelle Appointments ausgefüllt
 public class AppointmentsActivity extends AppCompatActivity {
 
     public static final String TABLEAPPOINTMENT = "appointment";
@@ -51,7 +51,6 @@ public class AppointmentsActivity extends AppCompatActivity {
         button_book_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), clickedIdContact + " - " + date + " " + duration, Toast.LENGTH_SHORT).show();
                 if(addAppointment()) {
                     Toast.makeText(getApplicationContext(), "Termin wurde hinzugefügt.",
                             Toast.LENGTH_SHORT).show();
@@ -69,7 +68,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         listAllTimes(tableTime);
 
     }
-
+    //Alle zeiten Uhrzeiten werden hier aufgelistet
     private void listAllTimes(TableLayout table) {
         int idFull = 1;
         int idHalf = 2;
@@ -87,7 +86,6 @@ public class AppointmentsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     onClickText(view, textFullHour);
-                    Toast.makeText(getApplicationContext(), "ID: " + clickedIdTime, Toast.LENGTH_SHORT).show();
                 }
             });
             tableRowTime.addView(textFullHour);
@@ -110,7 +108,7 @@ public class AppointmentsActivity extends AppCompatActivity {
 
         }
     }
-
+    //wenn man auf eine Uhrzeit klickt, dann wird die clickedID gesetzt
     private void onClickText(View view, TextView text) {
         if (clickedIdTime != 0) {
             text = findViewById(clickedIdTime);
@@ -124,7 +122,7 @@ public class AppointmentsActivity extends AppCompatActivity {
 
     }
 
-
+    //Alle gespeicherten Kontakte werden aufgelistet
     public void listAllContacts(TableLayout table) {
         table.removeViews(1, Math.max(0, table.getChildCount() - 1));
 
@@ -173,7 +171,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         cursor.close();
         database.close();
     }
-
+    //wenn auf die Zeile geklickt wird, wir die ClickedIDContact ausgewählt
     public void onClickTableRow(View view, TableRow table) {
 
         if (clickedIdContact != 0) {
@@ -185,10 +183,8 @@ public class AppointmentsActivity extends AppCompatActivity {
         clickedIdContact = view.getId();
         table = findViewById(clickedIdContact);
         table.setBackgroundColor(getResources().getColor(R.color.teal_200));
-        Toast.makeText(getApplicationContext(), "ID: " + clickedIdContact, Toast.LENGTH_SHORT).show();
-
     }
-
+    //die Id wird in eine eine Zeit umgewandelt
     public String convertToTime() {
         TextView text = findViewById(clickedIdTime);
         String txt = text.getText().toString().trim();
@@ -196,22 +192,25 @@ public class AppointmentsActivity extends AppCompatActivity {
         format = format.replace(' ','0');
         return  format;
     }
-
+    //die Termine werden in die Tabelle Appointments geschrieben
     public boolean addAppointment() {
         boolean check = false;
-        Appointments appointments = new Appointments();
-        try {
-            String myTime = convertToTime();
-            Toast.makeText(getApplicationContext(), "TIME: " + myTime, Toast.LENGTH_SHORT).show();
-            SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
-            database.execSQL("INSERT INTO " + TABLEAPPOINTMENT + " (" + COLUMN_CONTACTID + ", " + COLUMN_DATE + ", "
-                    + COLUMN_TIME + ", " + COLUMN_DURATION + ")VALUES('" + clickedIdContact + "','" + date + "','"
-                    + myTime + "','" + duration + "')");
-            database.close();
-            check = true;
-        } catch (Exception e) {
-            check = false;
-            e.printStackTrace();
+        if (!(clickedIdContact == 0 || convertToTime().isEmpty())) {
+            Appointments appointments = new Appointments();
+            try {
+                String myTime = convertToTime();
+                SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
+                database.execSQL("INSERT INTO " + TABLEAPPOINTMENT + " (" + COLUMN_CONTACTID + ", " + COLUMN_DATE + ", "
+                        + COLUMN_TIME + ", " + COLUMN_DURATION + ")VALUES('" + clickedIdContact + "','" + date + "','"
+                        + myTime + "','" + duration + "')");
+                database.close();
+                check = true;
+            } catch (Exception e) {
+                check = false;
+                e.printStackTrace();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Bitte wähle ein Kontakt und eine Uhrzeit aus!", Toast.LENGTH_SHORT).show();
         }
         return check;
     }

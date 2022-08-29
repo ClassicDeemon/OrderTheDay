@@ -1,5 +1,5 @@
 package de.jumichel.ordertheday;
-
+//Klasse von Kontakten
 public class Contact {
 
     private String forname;
@@ -7,14 +7,15 @@ public class Contact {
     private String phonenumber;
     private Address address;
 
+    //default Konstruktor
     public Contact() {
-
-        forname = "Erik";
+        forname = "Max";
         surname = "Mustermann";
         phonenumber = "016011111111";
         address = new Address();
     }
 
+    //Konstruktor alle Informationen von Kontakten werden hinzugefügt
     public Contact(String forname, String surname, String phonenumber, String street, String number, String postcode, String city) {
         this.forname = forname;
         this.surname = surname;
@@ -22,6 +23,7 @@ public class Contact {
         this.address = new Address(street, number, postcode, city);
     }
 
+    //Getters und Setters
     public String getForname() {
         return forname;
     }
@@ -54,6 +56,7 @@ public class Contact {
         this.address = address;
     }
 
+    //toString Methode für die Ausgabe
     public String toString() {
         return forname + " " + surname + ", " + phonenumber + ", " + address.toString();
     }

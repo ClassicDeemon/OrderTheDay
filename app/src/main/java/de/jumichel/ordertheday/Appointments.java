@@ -20,19 +20,24 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 import de.jumichel.ordertheday.ContactActivity;
-
+//Klasse für Dauer und Datum definieren
 public class Appointments extends AppCompatActivity {
 
+    //globale Klassen Variable
     private Date date;
     private double duration;
     private String myDate;
 
-    public Appointments(){}
-
     CalendarView calendar;
     EditText duration_text;
 
+    //default Kontruktor
+    public Appointments(){}
 
+    /*
+    Wenn die ACtivity startet wird das ausgeführt
+
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +47,14 @@ public class Appointments extends AppCompatActivity {
 
         duration_text = findViewById(R.id.text_duration);
 
-
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener(){
+
+            /*
+            wenn ein Datum ausgewählt wird, wird falls die Dauer richtig eingetragen wurde
+            Durch die OnSelectedDayChange wird der Tag, Monat und Jahr übergeben
+            diese Variablen werden in die Klasse Datum als Konstruktor geschrieben
+            diese und die Dauer werden in die Intents geschrieben für die nächste Klasse
+             */
 
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
@@ -72,14 +83,7 @@ public class Appointments extends AppCompatActivity {
             }
         });
     }
-
-   /* private void addToTableAppointment(Date date) {
-        SQLiteDatabase database = getBaseContext().openOrCreateDatabase(MainActivity.databaseName, MODE_PRIVATE, null);
-        database.execSQL("INSERT INTO " + AppointmentsActivity.TABLEAPPOINTMENT + " (" + AppointmentsActivity.COLUMN_DATE + ", "
-                + AppointmentsActivity.COLUMN_DURATION + ")VALUES('" +  date.toString() + "','"
-                + duration + "')");
-        database.close();
-    }*/
+    //das datum setzen
     public void setDate(int year, int month, int day) {
         date.setDay(day);
         date.setMonth(month);
