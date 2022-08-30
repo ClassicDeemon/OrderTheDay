@@ -17,9 +17,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
+//Klasse zur Kontakt-Verwaltung
 public class ContactActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //alle wichtigen Variablen und Views
     int clickedID;
 
     Button button_add;
@@ -60,6 +61,7 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         button_search.setOnClickListener(this);
         button_deleteContact.setOnClickListener(this);
 
+        //alle Kontakte sollen in der delarierten Tabelle aufgerufen werden
         listAllContacts(table);
 
     }

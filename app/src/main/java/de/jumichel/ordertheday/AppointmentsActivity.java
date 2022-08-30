@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
     //Hier wird die tabelle Appointments ausgefüllt
 public class AppointmentsActivity extends AppCompatActivity {
-
+    //alle wichtigen variablen und Views
     public static final String TABLEAPPOINTMENT = "appointment";
     public static final String COLUMN_CONTACTID = "app_conid";
     public static final String COLUMN_DATE = "app_date";
@@ -44,6 +44,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_appointments2);
 
         button_book_appointment = findViewById(R.id.button_book_appointment);
+        //das Datum und die Dauer wird aus den Intents geladen, die in Klasse Appointments reingeschrieben worden waren
         Intent intent = getIntent();
         duration = intent.getStringExtra("Duration");
         date = intent.getStringExtra("Date");

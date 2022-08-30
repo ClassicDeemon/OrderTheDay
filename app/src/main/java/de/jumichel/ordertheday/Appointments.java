@@ -34,10 +34,8 @@ public class Appointments extends AppCompatActivity {
     //default Kontruktor
     public Appointments(){}
 
-    /*
-    Wenn die ACtivity startet wird das ausgeführt
 
-     */
+    //Wenn die Activity startet wird das ausgeführt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

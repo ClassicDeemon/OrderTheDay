@@ -2,6 +2,8 @@ package de.jumichel.ordertheday;
 //Klasse zur Adresse Erstellung
 public class Address {
 
+    //Hier gilt auch, hier wird es genauer beschrieben und bei aneren methodisch gleichen Klassen, nur adaptiert
+
     //Strings für die Klassen
     private String street;
     private String number;

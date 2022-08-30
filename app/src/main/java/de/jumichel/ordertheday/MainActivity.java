@@ -15,9 +15,18 @@ import android.widget.Button;
     Mit der Aufschrift "Termine verwalten" kann man Termine verwalten
     Mit der Aufschrift "Kontakte verwalten" kann man Kontakte verwalten
     Mit der Aufschrift "Alle Termine auflisten" sieht man eine Übersicht aller Termine
+
+    author: Justin Michel 56543
+    version: 1.0
 */
 
 public class MainActivity extends AppCompatActivity {
+
+    /*
+    hier werden Standard Dinge wie die Deklaration von einzelnene Variablen und Views, sowie die
+    Verknüpfung mit den IDs genauer Erläutert. Im weiteren Verlauf des programmes dann nicht mehr,
+    da es immer der gleiche Ablauf ist.
+    */
 
     //Hier werden für die Tabelle der Kontakte die Spalten definiert
     public static final String COLUMN_ID = "con_id";
@@ -76,9 +85,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //Abfrage, ob die App zum ersten Mal startet
-    //in die sharedPreferences wird unter dem Namen "firstAppStart" ein boolean-Wert hinterlegt
-    //dies passiert beim ersten Start
+    /*
+    Abfrage, ob die App zum ersten Mal startet
+    in die sharedPreferences wird unter dem Namen "firstAppStart" ein boolean-Wert hinterlegt
+    dies passiert beim ersten Start
+     */
     public boolean firstAppStart() {
         boolean first = false;
         SharedPreferences sharedPreferences = getSharedPreferences("firstAppStart", MODE_PRIVATE);

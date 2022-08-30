@@ -2,9 +2,11 @@ package de.jumichel.ordertheday;
 //Klasse des Datums
 public class Date {
 
+    //alle wichtigen variablen
     private int day;
     private int month;
     private int year;
+
     //Konstrukter
     public Date(int day, int month, int year) {
         this.day = day;

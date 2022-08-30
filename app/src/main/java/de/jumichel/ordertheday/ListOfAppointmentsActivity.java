@@ -14,6 +14,7 @@ import android.widget.Toast;
 //Klasse wo alle termine aufgelistet werden und das Löschen dieser unternommen werden kann
 public class ListOfAppointmentsActivity extends AppCompatActivity {
 
+    //alle deklarierten Variablen und Views
     int clickedID;
 
     TableLayout table;
@@ -31,8 +32,10 @@ public class ListOfAppointmentsActivity extends AppCompatActivity {
         table = findViewById(R.id.table_all_appointments);
         button_delete_appointment = findViewById(R.id.btnDeleteAppointment);
 
+        //alle Termine sollen aufgelistet werden
         listAllAppointments();
 
+        //wenn er Knopf zum Löschen von terminen gedrückt wird
         button_delete_appointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
